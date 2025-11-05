@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="//unpkg.com/vue@2/dist/vue.js"></script>
+    <script src="//unpkg.com/element-ui@2.15.14/lib/index.js"></script>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="truecss.css">
+</head>
+<body>
+<!-- 头部 -->
+<div class="title1">
+    <div class="text1" style="font-size:20px;">广州市二手房数据分析</div>
+</div>
+
+<!-- 主体 -->
+<div class="back1">
+    <div class="left1">
+        <ul>
+            <li><a href="./first.html">首页<span>></span></a></li>
+<!--            <li><a href="./second.html">1111<span>></span></a></li>-->
+            <li><a href="./third.html">一般性分析<span>></span></a></li>
+            <li><a href="./fourth.html">广州市房价热力图<span>></span></a></li>
+            <li><a href="./fifth.html">广州市辖区平均房价<span>></span></a></li>
+            <li><a href="./sixth.html">总结<span>></span></a></li>
+        </ul>
+    </div>
+
+    <div class="right1" style="justify-content: center">
+        <div id="app">
+            <template>
+                <el-carousel :interval="5000" arrow="always">
+                    <el-carousel-item v-for="(src, index) in item" :key="index">
+                        <img :src="src" alt="image" />
+                    </el-carousel-item>
+                </el-carousel>
+            </template>
+        </div>
+    </div>
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                item: [
+                    'static/1.png',
+                    'static/2.png',
+                    'static/3.png',
+                    'static/4.png'
+                ]
+            };
+        }
+    });
+</script>
+</body>
+</html>

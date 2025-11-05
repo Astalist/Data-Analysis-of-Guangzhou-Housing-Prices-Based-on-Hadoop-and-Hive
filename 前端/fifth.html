@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="truecss.css">
+</head>
+<body>
+<!-- 头部 -->
+<div class="title1">
+    <div class="text1" style="font-size:20px;">广州市二手房数据分析</div>
+</div>
+
+<!-- 主体 -->
+<div class="back1">
+    <div class="left1">
+        <ul>
+            <li><a href="./first.html">首页<span>></span></a></li>
+<!--            <li><a href="./second.html">1111<span>></span></a></li>-->
+            <li><a href="./third.html">一般性分析<span>></span></a></li>
+            <li><a href="./fourth.html">广州市房价热力图<span>></span></a></li>
+            <li><a href="./fifth.html">广州市辖区平均房价<span>></span></a></li>
+            <li><a href="./sixth.html">总结<span>></span></a></li>
+        </ul>
+    </div>
+
+    <div class="right1">
+        <div id="chart" class="pic">
+            <!-- 图在这里面 -->
+            <ul style="display: flex;">
+                <li id="chart1" style=" width: 1460px;height: 770px;">
+                    <script type="text/javascript">
+                        var chart1=echarts.init(document.getElementById("chart1"));
+                        var option={
+                            title:{
+                            text:"广州市地区房价",
+                            textStyle:{
+                                fontSize:15
+                            },
+                            top:"6%"
+                        },
+                        grid:{
+                            right:"5%",
+                            bottom:"3%",
+                            containLabel:!0
+                        },
+                        tooltip:{
+                            trigger:"item",
+                            formatter:"平均总价 <br/>{b} : {c}"},
+
+
+                            series:[
+                                {
+                                    name:"平均总价",
+                                    orient:"vertical",
+                                    type:"funnel",
+                                    left:"20%",
+                                    bottom:60,
+                                    width:"60%",
+                                    min:0,
+                                    max:370,
+                                    minSize:"0%",
+                                    maxSize:"100%",
+                                    sort:"descending",
+                                    gap:2,
+                                    label:{
+                                        show:!0,
+                                        position:"left"
+                                    },
+                                    labelLine:{
+                                        length:50,
+                                        lineStyle:{
+                                            width:1,
+                                            type:"dotted"
+                                        }
+                                    },
+                                    itemStyle:{
+                                        borderColor:"#fff",
+                                        borderWidth:1
+                                    },
+                                    emphasis:{
+                                        label:{
+                                            fontSize:20
+                                        }
+                                    },
+                                    data:[
+                                        {
+                                            value:537.8011149825784,
+                                            name:"天河区"
+                                        },
+                                        {
+                                            value:395.6590887740723,
+                                            name:"越秀区"
+                                        },
+                                        {
+                                            value:331.48335060449057,
+                                            name:"海珠区"
+                                        },
+                                        {
+                                            value:324.85655601659755,
+                                            name:"荔湾区"
+                                        },
+                                        {
+                                            value:286.48939823008845,
+                                            name:"白云区"
+                                        },
+                                        {
+                                            value:272.95784447476126,
+                                            name:"黄埔区"
+                                        },
+                                        {
+                                            value:266.3631646655232,
+                                            name:"番禺区"
+                                        },
+                                        {
+                                            value:262.7177049180327,
+                                            name:"南海区"
+                                        },
+                                        {
+                                            value:214.36684508492007,
+                                            name:"南沙区"
+                                        },
+                                        {
+                                            value:148.41100478468903,
+                                            name:"花都区"
+                                        },
+                                        {
+                                            value:129.3462643678162,
+                                            name:"增城区"
+                                        },
+                                        {
+                                            value:103.06471885336285,
+                                            name:"从化区"
+                                        },
+
+
+                                    ]
+                                }
+                            ]
+                        };
+                        chart1.setOption(option);
+                    </script>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- <script>
+    new Vue({
+        el:"#chart",
+        methods:{
+            add:function(){
+
+            }
+        }
+    })
+</script> -->
+</body>
+</html>

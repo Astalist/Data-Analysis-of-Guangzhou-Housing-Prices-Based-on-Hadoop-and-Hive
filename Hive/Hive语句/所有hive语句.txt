@@ -1,0 +1,75 @@
+create table true_hive_test(
+    bt string,
+    zj double,
+    dj double,
+    qy string,
+    fwhx string,
+    jzmj string,
+    hxjg string,
+    jzlx string,
+    szlc string,
+    lcgd string,
+    tnmj string,
+    fwcx string,
+    jzjg string,
+    zxqk string,
+    htbl string,
+    pbdt string,
+    zbpt string,
+    jtcx string
+)
+row format delimited
+fields terminated by ',';
+
+load data inpath '/user/hive_data/true_data.csv' into table true_hive_test;
+
+select count(DISTINCT qy)
+from true_hive_test
+where qy is not NULL;
+
+select qy,count(*)
+from true_hive_test
+group by qy;
+
+select count(*)
+from true_hive_test;
+
+select qy,avg(zj)
+from true_hive_test
+group by qy;
+
+select qy,count(*)
+from true_hive_test
+group by qy
+order by count(*) desc
+limit 5 ;
+
+select qy,count(*)
+from true_hive_test
+group by qy ;
+
+select qy,count(*)
+from true_hive_test
+where zxqk='精装'
+group by qy;
+
+select qy,count(*)
+from true_hive_test
+where zxqk!='精装'
+group by qy ;
+
+select count(*) from true_hive_test where hxjg='平层';
+select count(*) from true_hive_test where hxjg='错层';
+select count(*) from true_hive_test where zxqk='毛坯';
+select count(*) from true_hive_test where zxqk='简装';
+select count(*) from true_hive_test where jzlx='塔楼';
+select count(*) from true_hive_test where jzlx='板楼';
+
+select qy,zj
+from true_hive_test
+order by zj desc
+limit 6;
+
+select qy,avg(zj)
+from true_hive_test
+group by qy

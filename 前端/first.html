@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="truecss.css">
+    <style>
+        /* 为 ECharts 图表提供基本的样式 */
+        .container1 {
+            width: 1460px;
+            height: 770px;
+            display: flex;
+            flex-wrap: wrap; /* 使图表自动换行 */
+            justify-content: space-around; /* 水平居中 */
+            align-items: flex-start; /* 垂直靠上 */
+            gap: 20px; /* 图表之间的间距 */
+            overflow: auto; /* 如果内容溢出，添加滚动条 */
+            padding: 10px;
+        }
+        .chart-box1 {
+            width: 640px; /* 每个图表宽度 */
+            height: 340px; /* 每个图表高度 */
+        }
+        .chart-box1 .pic1 {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部 -->
+    <div class="title1">
+        <div class="text1" style="font-size:20px;">广州市二手房数据分析</div>
+<!--        <ul>-->
+<!--            <li><a href="#">整体分析</a></li>-->
+<!--            <li><a href="#">聚类分析</a></li>-->
+<!--            <li><a href="#">个人分析</a></li>-->
+<!--        </ul>-->
+    </div>
+
+    <!-- 主体 -->
+    <div class="back1">
+        <div class="left1">
+            <ul>
+                <li><a href="./first.html">首页<span>></span></a></li>
+<!--                <li><a href="./second.html">1111<span>></span></a></li>-->
+                <li><a href="./third.html">一般性分析<span>></span></a></li>
+                <li><a href="./fourth.html">广州市房价热力图<span>></span></a></li>
+                <li><a href="./fifth.html">广州市辖区平均房价<span>></span></a></li>
+                <li><a href="./sixth.html">总结<span>></span></a></li>
+            </ul>
+        </div>
+
+        <div class="right1">
+            <img src="static/bg1.png" alt="" style="height:100% ;width: 100%;">
+        </div>
+    </div>
+</body>
+</html>

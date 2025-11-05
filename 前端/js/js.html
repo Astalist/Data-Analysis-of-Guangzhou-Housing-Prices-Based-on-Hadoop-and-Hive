@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="demo">123</div>
+    <button onclick='document.getElementById("demo").innerHTML="456"'>change to 456</button>
+    <button type="button" onclick='document.getElementById("demo").innerHTML="789"'>change to 789</button>
+
+    <button onclick='myfunction()'>use function change</button>
+    <button onclick='f()'>引入</button>
+
+    <button onclick="document.write(6+5)">这里是测试document.wirte(),在文档加载完后使用会删除所有内容</button>
+    <button onclick="window.alert(5+6)">alert弹窗测试</button>
+
+    <img id="demo1" src='./images/3adf2b8288f75942e95d24f5f701f528.jpg'></img>
+    <button onclick='document.getElementById("demo1").src="./images/3adf2b8288f75942e95d24f5f701f528.jpg"'>123</button>
+    <button onclick="document.getElementById('demo1').src='./images/41a3f8dc81c8f054f1d2db72d3203746.jpg'">456</button>
+
+
+
+    
+    <script> 
+        function myfunction(){
+            document.getElementById("demo").innerHTML="123456789";
+        }
+    </script>
+    <script src="./test.js"></script>
+    <script>
+        document.write("qaz");
+        document.write(5+6);
+        console.log("浏览器输出的内容");
+    </script>
+
+
+
+
+
+</body>
+</html>

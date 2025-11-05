@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <link type="text/css" href="css/public1.css" rel="stylesheet">
+    <link type="text/css" href="css/icon1.css" rel="stylesheet">
+    <link type="text/css" href="css/index1.css" rel="stylesheet">
+    <script type="text/javascript">
+        document.documentElement.style.fontSize = document.documentElement.clientWidth /768*100 + 'px';
+    </script>
+        <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="truecss.css">
+</head>
+<body>
+    <!-- 头部 -->
+    <div class="title1">
+        <div class="text1" style="font-size:20px;">广州市二手房数据分析</div>
+    </div>
+
+    <!-- 主体 -->
+    <div class="back1">
+        <div class="left1">
+            <ul>
+                <li><a href="./first.html">首页<span>></span></a></li>
+<!--                <li><a href="./second.html">1111<span>></span></a></li>-->
+                <li><a href="./third.html">一般性分析<span>></span></a></li>
+                <li><a href="./fourth.html">广州市房价热力图<span>></span></a></li>
+                <li><a href="./fifth.html">广州市辖区平均房价<span>></span></a></li>
+                <li><a href="./sixth.html">总结<span>></span></a></li>
+            </ul>
+        </div>
+
+        <div class="right1">
+            <div id="chart" class="pic">
+                <!-- 图在这里面 -->
+                <ul style="display: flex;">
+                    <li id="chart1" style=" width: 100%;height: 770px;">
+                        <!-- <div> -->
+                            <div style="width: 100%;height: 120%;">
+                            <div class="bg" style="background-color: rgb(236, 236, 236);">
+                                <div class="title" style="color: black;">房源数据一般性分析与统计</div>
+                                <div class="leftMain">
+                                    <div class="leftMain_top">
+                                        <div class="leftMain_topIn">
+                                            <ul>
+                                                <li>
+                                                    <div class="liIn">
+                                                        <h3 style="color: black;">总计市辖区</h3>
+                                                        <p class="shu"><span class="shu1">12</span><i></i></p>
+                                                        <div class="zi"><span class="span1" style="font-size:15px;"> </span><span> </span></div>
+                                                        <span class="border_bg_leftTop"></span>
+                                                        <span class="border_bg_rightTop"></span>
+                                                        <span class="border_bg_leftBottom"></span>
+                                                        <span class="border_bg_rightBottom"></span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="liIn">
+                                                        <h3 style="color: black;">单辖区最多房源数量</h3>
+                                                        <p class="shu"><span class="shu2">3474</span><i></i></p>
+                                                        <div class="zi"><span class="span1" style="font-size:15px;">辖区</span><span style="font-size:15px;">海珠区</span></div>
+                                                        <span class="border_bg_leftTop"></span>
+                                                        <span class="border_bg_rightTop"></span>
+                                                        <span class="border_bg_leftBottom"></span>
+                                                        <span class="border_bg_rightBottom"></span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="liIn">
+                                                        <h3 style="color: black;">单辖区最少房源数量</h3>
+                                                        <p class="shu"><span class="shu3">418</span><i></i></p>
+                                                        <div class="zi"><span class="span1" style="font-size:15px;">辖区</span><span style="font-size:15px;">花都区</span></div>
+                                                        <span class="border_bg_leftTop"></span>
+                                                        <span class="border_bg_rightTop"></span>
+                                                        <span class="border_bg_leftBottom"></span>
+                                                        <span class="border_bg_rightBottom"></span>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="liIn">
+                                                        <h3 style="color: black;">总房源</h3>
+                                                        <p class="shu"><span class="shu4">20350</span><i></i></p>
+                                                        <div class="zi"><span class="span1" style="font-size:15px;"> </span><span> </span></div>
+                                                        <span class="border_bg_leftTop"></span>
+                                                        <span class="border_bg_rightTop"></span>
+                                                        <span class="border_bg_leftBottom"></span>
+                                                        <span class="border_bg_rightBottom"></span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="leftMain_middle">
+                                        <div class="leftMain_middle_left">
+                                            <div class="leftMain_middle_leftIn">
+                                                <h3 style="color: black;">各辖区平均房价</h3>
+                                                <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+                                                <div class="biaoge" style="width:100%; height:25vh" id="chartmain"></div>
+                                                <script type="text/javascript">
+                                                //window.onload = function () {
+                                                            //指定图表的配置项和数据
+                                                            var dataAxis = ['天河区', '从化区', '南沙区', '增城区', '南海区', '海珠区', '番禺区', '白云区', '花都区', '荔湾区', '越秀区', '黄埔区'];
+                                                            var data = [55445, 9729, 19468, 12716, 22451, 39387, 24966, 30614, 14624, 36597, 40143,21255];
+                                                            var yMax = 60000;
+                                                            var dataShadow = [];
+
+                                                            for (var i = 0; i < data.length; i++) {
+                                                                dataShadow.push(yMax);
+                                                            }
+
+                                                            option = {
+                                                                title: {
+                                                                    text: '',
+                                                                    subtext: ''
+                                                                },
+                                                                grid:{
+                                                                    x:30,
+                                                                    y:30,
+                                                                    x2:20,
+                                                                    y2:20,
+
+                                                                },
+                                                                xAxis: {
+                                                                    data: dataAxis,
+
+                                                                    axisLabel: {
+                                                                        /*inside: true,*/
+                                                                        interval:0,
+                                                                        textStyle: {
+                                                                            color: '#000',
+                                                                            fontSize: 9
+
+                                                                        },
+                                                                        rotate:20
+                                                                    },
+
+                                                                    axisTick: {
+                                                                        show: false,
+                                                                    },
+                                                                    axisLine: {
+                                                                        show: true,
+                                                                        symbol:['none', 'arrow'],
+                                                                        symbolOffset: 12,
+                                                                        lineStyle:{
+                                                                            color: '#000',
+                                                                        }
+                                                                    },
+                                                                    z: 10
+                                                                },
+                                                                yAxis: {
+                                                                    type: 'value',
+                                                                    name: '单位：元',
+                                                                    axisLine: {
+                                                                        show: true,
+                                                                        symbol: ['none', 'arrow'],
+                                                                        symbolOffset: 12,
+                                                                        lineStyle:{
+                                                                            color: '#000',
+                                                                        }
+                                                                    },
+                                                                    axisTick: {
+                                                                        show: false
+                                                                    },
+                                                                    axisLabel: {
+                                                                        textStyle: {
+                                                                            color: '#000',
+                                                                            fontSize: 7
+                                                                        }
+                                                                    }
+                                                                },
+
+                                                                dataZoom: [
+                                                                    {
+                                                                        type: 'inside'
+                                                                    }
+                                                                ],
+                                                                series: [
+                                                                    { // For shadow
+                                                                        type: 'bar',
+                                                                        itemStyle: {
+                                                                            color: 'rgba(0,0,0,0.05)'
+                                                                        },
+                                                                        barGap: '-100%',
+                                                                        barCategoryGap: '40%',
+                                                                        data: dataShadow,
+                                                                        animation: false
+                                                                    },
+                                                                    {
+                                                                        type: 'bar',
+                                                                        itemStyle: {
+                                                                            color: new echarts.graphic.LinearGradient(
+                                                                                0, 0, 0, 1,
+                                                                                [
+                                                                                    {offset: 0, color: '#006b8e'},  /* 深青色 */
+                                                                                    {offset: 0.5, color: '#025e89'},  /* 深蓝色 */
+                                                                                    {offset: 1, color: '#003b55'}   /* 更深的蓝色 */
+                                                                                ]
+                                                                            )
+                                                                        },
+                                                                        emphasis: {
+                                                                            itemStyle: {
+                                                                                color: new echarts.graphic.LinearGradient(
+                                                                                    0, 0, 0, 1,
+                                                                                    [
+                                                                                        {offset: 0, color: '#2378f7'},
+                                                                                        {offset: 0.7, color: '#2378f7'},
+                                                                                        {offset: 1, color: '#0efdff'}
+                                                                                    ]
+                                                                                )
+                                                                            }
+                                                                        },
+                                                                        data: data
+                                                                    }
+                                                                ]
+                                                            };
+
+                                                            // Enable data zoom when user click bar.
+                                                            /*var zoomSize = 6;
+                                                            myChart.on('click', function (params) {
+                                                                console.log(dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)]);
+                                                                myChart.dispatchAction({
+                                                                    type: 'dataZoom',
+                                                                    startValue: dataAxis[Math.max(params.dataIndex - zoomSize / 2, 0)],
+                                                                    endValue: dataAxis[Math.min(params.dataIndex + zoomSize / 2, data.length - 1)]
+                                                                });
+                                                            });*/
+
+                                                            //获取dom容器
+                                                            var myChart = echarts.init(document.getElementById('chartmain'));
+                                                            // 使用刚指定的配置项和数据显示图表。
+                                                            myChart.setOption(option);
+                                                    //};
+                                                </script>
+                                                <span class="border_bg_leftTop"></span>
+                                                <span class="border_bg_rightTop"></span>
+                                                <span class="border_bg_leftBottom"></span>
+                                                <span class="border_bg_rightBottom"></span>
+                                            </div>
+                                        </div>
+                                        <div class="leftMain_middle_right">
+                                            <div class="leftMain_middle_rightIn">
+                                                <h3 style="color: black;">房源数量前5的辖区</h3>
+                                                <div class="biaoge biaoge_pai" style="width:100%; height:25vh">
+                                                    <div class="biaoge_paiIn">
+                                                        <ul>
+                                                            <li>
+                                                                <div class="liIn">
+                                                                    <div class="liIn_left"><span class="bot"></span><span class="zi"></span>海珠区</div>
+                                                                    <div class="liIn_line"><div class="line_lineIn" style="width:100%;"></div></div>
+                                                                    <p class="num">3474</p>
+                                                                </div>
+                                                            </li>
+                                                             <li>
+                                                                <div class="liIn liIn2">
+                                                                    <div class="liIn_left"><span class="bot"></span><span class="zi">荔湾区</span></div>
+                                                                    <div class="liIn_line"><div class="line_lineIn" style="width:69.4%;"></div></div>
+                                                                    <p class="num">2410</p>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="liIn liIn3">
+                                                                    <div class="liIn_left"><span class="bot"></span><span class="zi">番禺区</span></div>
+                                                                    <div class="liIn_line"><div class="line_lineIn" style="width:67.1%;"></div></div>
+                                                                    <p class="num">2332</p>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="liIn liIn4">
+                                                                    <div class="liIn_left"><span class="bot"></span><span class="zi">越秀区</span></div>
+                                                                    <div class="liIn_line"><div class="line_lineIn" style="width:61.3%;"></div></div>
+                                                                    <p class="num">2129</p>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="liIn liIn5">
+                                                                    <div class="liIn_left"><span class="bot"></span><span class="zi">南沙区</span></div>
+                                                                    <div class="liIn_line"><div class="line_lineIn" style="width:55.6%;"></div></div>
+                                                                    <p class="num">1943</p>
+                                                                </div>
+                                                            </li>
+<!--                                                            <li>-->
+<!--                                                                <div class="liIn liIn6">-->
+<!--                                                                    <div class="liIn_left"><span class="bot"></span><span class="zi">第六名</span></div>-->
+<!--                                                                    <div class="liIn_line"><div class="line_lineIn" style="width:10.5%;"></div></div>-->
+<!--                                                                    <p class="num">10.5%</p>-->
+<!--                                                                </div>-->
+<!--                                                            </li>-->
+                                                       </ul>
+                                                    </div>
+                                                </div>
+                                                <span class="border_bg_leftTop"></span>
+                                                <span class="border_bg_rightTop"></span>
+                                                <span class="border_bg_leftBottom"></span>
+                                                <span class="border_bg_rightBottom"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="leftMain_middle">
+                                        <div class="leftMain_middle_left">
+                                            <div class="leftMain_middle_leftIn">
+                                                <h3 style="color: black;">房源装修情况统计</h3>
+                                                <div class="biaoge" style="width:100%; height:25vh" id="chartmain_zhe"></div>
+                                                <script type="text/javascript">
+                                                //window.onload = function (){
+                                                            //指定图表的配置项和数据
+
+                                                option = {
+                                                    title: {
+                                                        text: ''
+                                                    },
+                                                    tooltip: {
+                                                        trigger: 'axis'
+                                                    },
+                                                    legend: {
+                                                        textStyle: {
+                                                            color: '#000',
+                                                            fontSize: 12,
+                                                        },
+                                                        right:'10%',
+                                                        data: ['各区精装房数量', '各区非精装房数量']
+                                                    },
+                                                    grid:{
+                                                            x:30,
+                                                            y:30,
+                                                            x2:20,
+                                                            y2:20,
+                                                        },
+                                                    toolbox: {
+                                                        feature: {
+                                                            //saveAsImage: {}
+                                                        }
+                                                    },
+                                                    xAxis: {
+                                                        type: 'category',
+                                                        boundaryGap: false,
+                                                        axisLabel: {
+                                                                        /*inside: true,*/
+                                                                        interval:0,
+                                                                        textStyle: {
+                                                                            color: '#000',
+                                                                            fontSize: 9
+
+                                                                        },
+                                                                        rotate:20
+<!--
+                                                                    },
+                                                                    axisTick: {
+                                                                        show: false,
+                                                                    },
+                                                                    axisLine: {
+                                                                        show: true,
+                                                                        symbol:['none', 'arrow'],
+                                                                        symbolOffset: 12,
+                                                                        lineStyle:{
+                                                                            color: '#000',
+                                                                        }
+                                                                    },
+                                                        data: ['从化区', '南沙区', '南海区', '增城区','天河区','海珠区', '番禺区', '白云区', '花都区', '荔湾区', '越秀区', '黄埔区']
+                                                    },
+                                                    yAxis: {
+                                                        type: 'value',
+
+
+
+                                                        axisLine: {
+                                                            show: true,
+                                                            symbol: ['none', 'arrow'],
+                                                            symbolOffset: 12,
+                                                            lineStyle:{
+                                                                color: '#000',
+                                                            }
+                                                        },
+                                                        axisTick: {
+                                                            show: false
+                                                        },
+                                                        axisLabel: {
+                                                            textStyle: {
+                                                                color: '#000',
+                                                                fontSize: 8
+                                                            }
+                                                        }
+                                                    },
+                                                    series: [
+                                                        {
+                                                            name: '各区精装房数量',
+                                                            type: 'line',
+                                                            stack: '总量',
+                                                            data: [337,951,1542,524,476,959,1016,576,156,807,569,407],
+                                                            itemStyle: {
+                                                                 normal: {
+                                                                   color: "#0efdff",//折线点的颜色
+                                                                   lineStyle: {
+                                                                   color: "#0efdff",//折线的颜色
+                                                                   width:2,
+                                                                  }
+                                                                },
+                                                            }
+                                                        },
+                                                        {
+                                                            name: '各区非精装房数量',
+                                                            type: 'line',
+                                                            stack: '总量',
+                                                            data: [570,992,288,520,959,2531,1316,1119,262,1603,1560,326]
+                                                        },
+                                                    ]
+                                                };
+                                                            //获取dom容器
+                                                            var myChart = echarts.init(document.getElementById('chartmain_zhe'));
+                                                            // 使用刚指定的配置项和数据显示图表。
+                                                            myChart.setOption(option);
+                                                    //};
+                                                </script>
+                                                <span class="border_bg_leftTop"></span>
+                                                <span class="border_bg_rightTop"></span>
+                                                <span class="border_bg_leftBottom"></span>
+                                                <span class="border_bg_rightBottom"></span>
+                                            </div>
+                                        </div>
+                                        <div class="leftMain_middle_right">
+                                            <div class="leftMain_middle_rightIn">
+                                                <h3 style="color: black;">房源具体情况统计</h3>
+                                                <div class="biaoge biaoge_bi" style="width:100%; height:25vh">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="liIn">
+                                                                <p class="shu shu1">20095</p>
+                                                                <p class="zi">平层房数量</p>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="liIn">
+                                                                <p class="shu shu2">383</p>
+                                                                <p class="zi">毛坯房数量</p>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="liIn">
+                                                                <p class="shu shu3">16068</p>
+                                                                <p class="zi">塔楼房数量</p>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="liIn">
+                                                                <p class="shu shu4">117</p>
+                                                                <p class="zi">错层数量</p>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="liIn">
+                                                                <p class="shu shu5">3659</p>
+                                                                <p class="zi">简装房数量</p>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="liIn">
+                                                                <p class="shu shu6">1840</p>
+                                                                <p class="zi">板楼</p>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+
+                                                </div>
+                                                <span class="border_bg_leftTop"></span>
+                                                <span class="border_bg_rightTop"></span>
+                                                <span class="border_bg_leftBottom"></span>
+                                                <span class="border_bg_rightBottom"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rightMain">
+                                    <div class="rightMain_top">
+                                        <div class="rightMain_topIn">
+                                            <h3 style="color: black;">各辖区房源数量占比</h3>
+                                            <div class="biaoge" style="width:100%; height:30vh" id="chartmain_bing"></div>
+                                            <script type="text/javascript">
+                                                option = {
+                                                    title: {
+                                                        text: '',
+                                                        subtext: '',
+                                                        left: 'right',
+                                                        textStyle: {
+                                                            color: '#000',
+                                                            fontSize: 12
+                                                        }
+                                                    },
+                                                    tooltip: {
+                                                        trigger: 'item',
+                                                        formatter: '{a} <br/>{b} : {c} ({d}%)'
+                                                    },
+                                                    legend: {
+                                                        type: 'scroll',
+                                                        orient: 'vertical',
+                                                        right: 10,
+                                                        top: 40,
+                                                        bottom: 20,
+                                                        left: 'right',
+                                                        data: ['从化', '南沙', '南海', '增城','天河','海珠', '番禺', '白云', '花都', '荔湾', '越秀', '黄埔'],
+                                                        textStyle: {
+                                                            color: '#000',
+                                                            fontSize: 12
+                                                        }
+                                                    },
+                                                    grid: {
+                                                        x: '-10%',
+                                                        y: 40,
+                                                        x2: 20,
+                                                        y2: 20,
+                                                    },
+                                                    color: ['#7184a3', '#9800ba', '#690046', '#0f695f', '#24495c','#f200ff','#ff4e00','#ffb1c5','#6400ff','#82a637','#825d5b','#b5a800'],
+                                                    series: [
+                                                        {
+                                                            type: 'pie',
+                                                            radius: ['30%', '70%'], // 外半径为70%, 内半径为30%（形成玫瑰图的花瓣形状）
+                                                            center: ['40%', '40%'],  // 设置中心位置
+                                                            roseType: 'radius',  // 设置为玫瑰图类型
+                                                            selectedMode: 'single',
+                                                            label: {
+                                                                show: false // 隐藏文字
+                                                            },
+                                                            labelLine: {
+                                                                show: false // 隐藏线条
+                                                            },
+                                                            data: [
+                                                                {value: 907, name: '从化'},
+                                                                {value: 1943, name: '南沙'},
+                                                                {value: 1830, name: '南海'},
+                                                                {value: 1044, name: '增城'},
+                                                                {value: 1435, name: '天河'},
+                                                                {value: 3474, name: '海珠'},
+                                                                {value: 2332, name: '番禺'},
+                                                                {value: 1695, name: '白云'},
+                                                                {value: 418, name: '花都'},
+                                                                {value: 2410, name: '荔湾'},
+                                                                {value: 2129, name: '越秀'},
+                                                                {value: 733, name: '黄埔'}
+                                                            ],
+                                                            emphasis: {
+                                                                itemStyle: {
+                                                                    shadowBlur: 10,
+                                                                    shadowOffsetX: 0,
+                                                                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                };
+
+                                                // 获取dom容器
+                                                var myChart = echarts.init(document.getElementById('chartmain_bing'));
+                                                // 使用刚指定的配置项和数据显示图表
+                                                myChart.setOption(option);
+                                            </script>
+                                            <span class="border_bg_leftTop"></span>
+                                            <span class="border_bg_rightTop"></span>
+                                            <span class="border_bg_leftBottom"></span>
+                                            <span class="border_bg_rightBottom"></span>
+                                        </div>
+
+                                     </div>
+                                    <div class="rightMain_bottom">
+                                        <div class="rightMain_bottomIn">
+                                            <h3 style="color: black;">房价top6</h3>
+                                            <div class="biaoge biaoge_list" style="width:100%; height:36vh">
+                                                <div class="biaoge_listIn">
+                                                    <ul class="ul_title">
+                                                        <li>辖区</li>
+                                                        <li>价格</li>
+                                                        <li>户型</li>
+                                                        <li>房屋朝向</li>
+<!--                                                        <li>类别三</li>-->
+                                                    </ul>
+                                                    <div class="ul_list">
+                                                        <div class="ul_listIn">
+                                                            <ul class="ul_con">
+                                                                <li>天河区</li>
+                                                                <li>6900w</li>
+                                                                <li>4室2厅4卫</li>
+                                                                <li>东南</li>
+<!--                                                                <li>类别三</li>-->
+                                                            </ul>
+                                                            <ul class="ul_con">
+                                                                <li>海珠区</li>
+                                                                <li>5700w</li>
+                                                                <li>5室2厅3卫</li>
+                                                                <li>南北</li>
+<!--                                                                <li>类别三</li>-->
+                                                            </ul>
+                                                            <ul class="ul_con">
+                                                                <li>海珠区</li>
+                                                                <li>5460w</li>
+                                                                <li>4室2厅4卫</li>
+                                                                <li>南</li>
+<!--                                                                <li>类别三</li>-->
+                                                            </ul>
+                                                            <ul class="ul_con">
+                                                                <li>天河区</li>
+                                                                <li>4800w</li>
+                                                                <li>5室2厅4卫</li>
+                                                                <li>南</li>
+<!--                                                                <li>类别三</li>-->
+                                                            </ul>
+                                                            <ul class="ul_con">
+                                                                <li>南海区</li>
+                                                                <li>4500w</li>
+                                                                <li>6室2厅6卫</li>
+                                                                <li>南</li>
+<!--                                                                <li>类别三</li>-->
+                                                            </ul>
+                                                            <ul class="ul_con">
+                                                                <li>越秀区</li>
+                                                                <li>4400w</li>
+                                                                <li>6室2厅5卫</li>
+                                                                <li>南北</li>
+<!--                                                                <li>类别三</li>-->
+                                                            </ul>
+                                                            <ul class="ul_con">
+                                                                <li>天河区</li>
+                                                                <li>6900w</li>
+                                                                <li>4室2厅3卫</li>
+                                                                <li>东南</li>
+                                                                <!--                                                                <li>类别三</li>-->
+                                                            </ul>
+                                                            <ul class="ul_con">
+                                                                <li>海珠区</li>
+                                                                <li>5700w</li>
+                                                                <li>5室2厅3卫</li>
+                                                                <li>南北</li>
+                                                                <!--                                                                <li>类别三</li>-->
+                                                            </ul>
+                                                            <ul class="ul_con">
+                                                                <li>海珠区</li>
+                                                                <li>5460w</li>
+                                                                <li>4室2厅4卫</li>
+                                                                <li>南</li>
+                                                                <!--                                                                <li>类别三</li>-->
+                                                            </ul>
+                                                            <ul class="ul_con">
+                                                                <li>天河区</li>
+                                                                <li>4800w</li>
+                                                                <li>5室2厅4卫</li>
+                                                                <li>南</li>
+                                                                <!--                                                                <li>类别三</li>-->
+                                                            </ul>
+                                                            <ul class="ul_con">
+                                                                <li>南海区</li>
+                                                                <li>4500w</li>
+                                                                <li>6室2厅6卫</li>
+                                                                <li>南</li>
+                                                                <!--                                                                <li>类别三</li>-->
+                                                            </ul>
+                                                            <ul class="ul_con">
+                                                                <li>越秀区</li>
+                                                                <li>4400w</li>
+                                                                <li>6室2厅5卫</li>
+                                                                <li>南北</li>
+                                                                <!--                                                                <li>类别三</li>-->
+                                                            </ul>
+                                                        </div>
+                                                   </div>
+                                               </div>
+
+                                            </div>
+                                            <span class="border_bg_leftTop"></span>
+                                            <span class="border_bg_rightTop"></span>
+                                            <span class="border_bg_leftBottom"></span>
+                                            <span class="border_bg_rightBottom"></span>
+                                        </div>
+                                     </div>
+                                </div>
+                                <div style="clear:both;"></div>
+                            </div>
+                        <!-- </div> -->
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- <script>
+        new Vue({
+            el:"#chart",
+            methods:{
+                add:function(){
+
+                }
+            }
+        })
+    </script> -->
+</body>
+</html>

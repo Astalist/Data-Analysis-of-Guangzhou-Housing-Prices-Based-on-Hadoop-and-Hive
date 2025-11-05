@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+    <script src="echarts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="truecss.css">
+</head>
+<body>
+<!-- 头部 -->
+<div class="title1">
+    <div class="text1" style="font-size:20px;">广州市二手房数据分析</div>
+<!--    <ul>-->
+<!--        <li><a href="#">整体分析</a></li>-->
+<!--        <li><a href="#">聚类分析</a></li>-->
+<!--        <li><a href="#">个人分析</a></li>-->
+<!--    </ul>-->
+</div>
+
+<!-- 主体 -->
+<div class="back1">
+    <div class="left1">
+        <ul>
+            <li><a href="./first.html">首页<span>></span></a></li>
+<!--            <li><a href="./second.html">1111<span>></span></a></li>-->
+            <li><a href="./third.html">一般性分析<span>></span></a></li>
+            <li><a href="./fourth.html">广州市房价热力图<span>></span></a></li>
+            <li><a href="./fifth.html">广州市辖区平均房价<span>></span></a></li>
+            <li><a href="./sixth.html">总结<span>></span></a></li>
+        </ul>
+    </div>
+
+    <div class="right1">
+        <div id="chart" class="pic">
+            <ul style="display: flex;">
+                <li id="main"style="width: 1600px;height: 850px;">
+                    <script type="text/javascript">
+                        // 基于准备好的dom，初始化echarts实例
+                        var myChart = echarts.init(document.getElementById('main'));
+                        myChart.showLoading();
+
+                        // 获取广州市的GeoJSON数据，确保你有一个正确的广州GeoJSON文件
+                        $.get('广州市.json', function (geoJson) {
+                            myChart.hideLoading();
+                            echarts.registerMap('Guangzhou', geoJson);
+
+                            myChart.setOption({
+                                title: {
+                                    text: '广州市各区平均房价',
+                                    left:'center',
+                                    subtext: '',
+                                },
+                                tooltip: {
+                                    trigger: 'item',
+                                    formatter: '{b}<br/>{c} 元 / 平方米'
+                                },
+
+                                visualMap: {
+                                    min: 10000,
+                                    max: 60000,
+                                    text: ['High', 'Low'],
+                                    realtime: false,
+                                    calculable: true,
+                                    inRange: {
+                                        color: ['lightskyblue', 'yellow', 'orangered']
+                                    },
+                                    left :'right',
+                                    bottom:50
+                                },
+                                series: [
+                                    {
+                                        name: '广州市各区平均房价',
+                                        type: 'map',
+                                        map: 'Guangzhou',  // 地图名称应与注册的地图名称一致
+                                        label: {
+                                            show: true
+                                        },
+                                        data: [
+                                            { name: '天河区', value: 55200.07 },
+                                            { name: '越秀区', value: 50916.42 },
+                                            { name: '白云区', value: 30670.40 },
+                                            { name: '花都区', value: 13925.90 },
+                                            { name: '番禺区', value: 24947.89 },
+                                            { name: '海珠区', value: 39423.70 },
+                                            { name: '荔湾区', value: 36501.10 },
+                                            { name: '黄埔区', value: 27274.98 },
+                                            { name: '南沙区', value: 19416.05 },
+                                            { name: '从化区', value: 9920.19 },
+                                            { name: '增城区', value: 12569.27 }
+                                        ],
+                                        // 如果有名称映射，可以在此处定义
+                                        nameMap: {
+                                            'Tianhe': '天河区',
+                                            'Yuexiu': '越秀区',
+                                            'Baiyun': '白云区',
+                                            'Huadu': '花都区',
+                                            'Panyu': '番禺区',
+                                            'Haizhu': '海珠区',
+                                            'Liwan': '荔湾区',
+                                            'Huangpu': '黄埔区',
+                                            'Nansha': '南沙区',
+                                            'Conghua': '从化区',
+                                            'Zengcheng': '增城区'
+                                        }
+                                    }
+                                ]
+                            });
+                        });
+                    </script>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- <script>
+    new Vue({
+        el:"#chart",
+        methods:{
+            add:function(){
+
+            }
+        }
+    })
+</script> -->
+</body>
+</html>
